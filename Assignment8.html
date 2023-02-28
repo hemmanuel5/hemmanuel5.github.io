@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"> 
+		<title>Weekly Commission</title>
+		<!-- Hephzibah Emmanuel, Section 18 !! -->
+    	<!--On my honor, I have neither received nor given any unauthorized assistance on this assignment.-->
+		<style>
+			body {background-color: azure; color: black}
+		</style>
+		<script>
+            
+            var rates = new Array(0.03, 0.02, 0.05);
+            var sales = new Array(3);
+            var commissions = new Array(3);
+            var computers = new Array ("Laptop", "Tablet", "Desktop")
+
+            function processButton(r, s, c)  //r = rates array, s = sales array, c = commissions array
+            {   
+                for (var i = 0; i < 3; i++)
+                {
+                    if (s[i] != null)
+                    {
+                        c[i]= r[i] * s[i]
+                    } 
+                    else
+                    {
+                        c[i] = 0
+                    }       
+                }
+                return c;                  
+            }
+
+           function reportButton(computersArray, salesArray, commissionsArray) 
+            {   
+                document.write("<b>Summary Report Listing: </b>" + "<hr>")
+                for (var i = 0; i < computers.length; i++)
+                {
+                    if (salesArray[i] == null)
+                    {
+                        salesArray[i] = 0
+                    }
+                    
+                    document.write("Type of computer: " + computersArray[i] + "<br>" +
+                    "Weekly Sales Amount: $" + (salesArray[i].toFixed(2)) + "<br>" +
+                    "Weekly Commission: $" + (commissionsArray[i].toFixed(2)) + "<hr>")
+                }  
+
+                var totalCommissions = 0;
+                for (var i = 0; i < commissions.length; i++)
+                {
+                    totalCommissions += commissions[i] 
+                }
+                document.write("Total commissions earned for the week: $" + (totalCommissions.toFixed(2)))
+            } 
+		</script>
+ 	</head>
+    
+     <body>
+         <h1>Weekly Commission:</h1>
+         <hr>
+
+         <h2>Inputs</h2>
+         <table border = "1">
+			<tr>
+				<th>Computer Type</th>
+				<th>Weekly Sales Amount</th>
+			</tr>
+			<tr>
+				<td> Laptop </td>
+				<td><input type="text" id="laptopSales" 
+                    onchange =
+                    '
+                        sales[0] = Number(laptopSales.value);
+                        commissions[0] = rates[0] * sales[0]
+                    ' ></td>	
+						
+			</tr>
+			<tr>
+				<td> Tablet </td>
+				<td><input type="text" id="tabletSales" 
+                    onchange = 
+                    '
+                        sales[1] = Number(tabletSales.value);
+                        commissions[1] = rates[1] * sales[1]
+                    ' ></td>
+			</tr>
+			<tr>
+				<td> Desktop </td>
+				<td><input type="text" id="desktopSales" 
+                    onchange = 
+                    '
+                        sales[2] = Number(desktopSales.value);
+                        commissions[2] = rates[2] * sales[2]
+                    ' ></td>
+			</tr>
+		</table>
+        
+        <p>
+            <input type = "button" id = "process" value = "Process" 
+            onclick = 
+            "
+                var weeklyCommissionsArray = processButton(rates, sales, commissions)
+                laptopCommission.value = weeklyCommissionsArray[0].toFixed(2);
+                tabletCommission.value = weeklyCommissionsArray[1].toFixed(2);
+                desktopCommission.value = weeklyCommissionsArray[2].toFixed(2);
+            ">
+
+            <input type = "button" id = "report" value = "Report"
+            onclick = 
+            "
+                reportButton(computers, sales,commissions)        
+            ">
+
+        </p>
+
+        <h2>Outputs</h2>
+        <table border = "1">
+			<tr>
+				<th>Computer Type</th>
+				<th>Weekly Commission</th>
+			</tr>
+			<tr>
+				<td> Laptop </td>
+				<td><input type="text" id="laptopCommission" 
+                    onchange =
+                    '' ></td>	
+						
+			</tr>
+			<tr>
+				<td> Tablet </td>
+				<td><input type="text" id="tabletCommission" 
+                    onchange = 
+                    '' ></td>
+			</tr>
+			<tr>
+				<td> Desktop </td>
+				<td><input type="text" id="desktopCommission" 
+                    onchange = 
+                    '' ></td>
+			</tr>
+		</table>
+     </body>
+
+
+
+</html>
